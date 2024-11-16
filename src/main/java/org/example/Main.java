@@ -52,13 +52,18 @@ public class Main {
                     // Abrir cuenta bancaria
                     System.out.println("\n** Abrir Cuenta Bancaria **");
                     System.out.println("Ingrese su DNI: ");
-                    String dniCuenta = consoleInput.nextLine();
+                    String dniCuenta = consoleInput.nextLine().trim();
 
+                    if(!banco.clienteRegistrado(dniCuenta)) {
+                        System.out.println("Error: El cliente con DNI " + dniCuenta + " no está registrado");
+                        break;
+                    }
+                    // Si dni es valido muestra opciones de cuenta
                     System.out.println("Elija tipo de cuenta:");
                     System.out.println("1 - AHORRO");
                     System.out.println("2 - CORRIENTE");
                     int tipoCuentaOpcion = consoleInput.nextInt();
-                    consoleInput.nextLine();
+                    consoleInput.nextLine().trim();
 
                     TipoCuenta tipoCuenta = null;
                     if (tipoCuentaOpcion == 1) {
@@ -82,7 +87,7 @@ public class Main {
                     // Consultar saldo
                     System.out.println("\n** Consultar Saldo **");
                     System.out.println("Ingrese su DNI: ");
-                    String dniSaldo = consoleInput.nextLine();
+                    String dniSaldo = consoleInput.nextLine().trim();
 
                     try {
                         banco.consultarSaldo((dniSaldo));
@@ -95,12 +100,12 @@ public class Main {
                     // Realizar retiro
                     System.out.println("\n** Realizar Retiro **");
                     System.out.println("Ingrese su DNI: ");
-                    String dniRetiro = consoleInput.nextLine();
+                    String dniRetiro = consoleInput.nextLine().trim();
                     System.out.println("Ingrese número de cuenta: ");
-                    String numeroCuenta = consoleInput.nextLine();
+                    String numeroCuenta = consoleInput.nextLine().trim();
                     System.out.println("Ingrese monto a retirar: ");
                     double montoRetiro = consoleInput.nextDouble();
-                    consoleInput.nextLine();
+                    consoleInput.nextLine().trim();
 
                     try {
                         banco.realizarRetiro(dniRetiro, numeroCuenta, montoRetiro);

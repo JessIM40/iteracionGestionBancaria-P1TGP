@@ -36,6 +36,10 @@ public class Banco {
         cuentas.put(numeroCuenta, cuenta);
     }
 
+    public boolean clienteRegistrado(String dni) {
+        return clientes.containsKey(dni);
+    }
+
     // Generar numero de cuenta unico
     private String generarNumeroCuenta() {
         return "CUENTA-" + (cuentas.size() + 1);
