@@ -90,8 +90,7 @@ public class Main {
                     String dniSaldo = consoleInput.nextLine().trim();
 
                     try {
-                        banco.consultarSaldo((dniSaldo));
-                        System.out.println("Cuenta bancaria abierta exitosamente");
+                        banco.consultarSaldo(dniSaldo);
                     } catch (IllegalArgumentException e) {
                         System.out.println("Error: " + e.getMessage());
                     }
@@ -105,7 +104,7 @@ public class Main {
                     String numeroCuenta = consoleInput.nextLine().trim();
                     System.out.println("Ingrese monto a retirar: ");
                     double montoRetiro = consoleInput.nextDouble();
-                    consoleInput.nextLine().trim();
+                    consoleInput.nextLine();
 
                     try {
                         banco.realizarRetiro(dniRetiro, numeroCuenta, montoRetiro);
@@ -119,16 +118,16 @@ public class Main {
                     // Realizar depósito
                     System.out.println("\n** Realizar Depósito **");
                     System.out.println("Ingrese su DNI: ");
-                    String dniDeposito = consoleInput.nextLine();
+                    String dniDeposito = consoleInput.nextLine().trim();
                     System.out.println("Ingrese número de cuenta: ");
-                    String numeroCuentaDeposito = consoleInput.nextLine();
+                    String numeroCuentaDeposito = consoleInput.nextLine().trim();
                     System.out.println("Ingrese monto a depositar: ");
                     double montoDeposito = consoleInput.nextDouble();
                     consoleInput.nextLine();
 
                     try {
                         banco.realizarDeposito(dniDeposito, numeroCuentaDeposito, montoDeposito);
-                        System.out.println("Retiro realizado exitosamente");
+                        System.out.println("Deposito realizado exitosamente");
                     } catch (IllegalArgumentException e) {
                         System.out.println("Error: " + e.getMessage());
                     }
