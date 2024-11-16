@@ -4,17 +4,17 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
 
-public class Cliente {
-    private String nombre;
-    private String apellido;
+public class Customer {
+    private String firstName;
+    private String lastName;
     private String dni;
     private String email;
-    private List<CuentaBancaria> cuentasBancarias;
+    private List<BankAccount> bankAccounts;
 
     // Constructor Cliente
-    public Cliente(String nombre, String apellido, String dni, String email) {
+    public Customer(String firstName, String lastName, String dni, String email) {
         // Valida campos obligatorios
-        if (isNullOrEmpty(nombre) || isNullOrEmpty(apellido) || isNullOrEmpty(dni) || isNullOrEmpty(email)) {
+        if (isNullOrEmpty(firstName) || isNullOrEmpty(lastName) || isNullOrEmpty(dni) || isNullOrEmpty(email)) {
             throw new IllegalArgumentException("Todos los campos son obligatorios");
         }
 
@@ -28,11 +28,11 @@ public class Cliente {
             throw new IllegalArgumentException("Email no válido");
         }
 
-        this.nombre = nombre;
-        this.apellido = apellido;
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.dni = dni;
         this.email = email;
-        this.cuentasBancarias = new ArrayList<>();
+        this.bankAccounts = new ArrayList<>();
     }
 
     // Metodo para validar cadenas vacias o nulas
@@ -53,12 +53,12 @@ public class Cliente {
     }
 
     // Getters
-    public String getNombre() {
-        return nombre;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public String getApellido() {
-        return apellido;
+    public String getLastName() {
+        return lastName;
     }
 
     public String getDni() {
@@ -69,13 +69,13 @@ public class Cliente {
         return email;
     }
 
-    public List<CuentaBancaria> getCuentasBancarias() {
-        return cuentasBancarias;
+    public List<BankAccount> getBankAccounts() {
+        return bankAccounts;
     }
 
 
     // Agregar cuenta bancaria
-    public void agregarCuenta(CuentaBancaria cuenta) {
-        cuentasBancarias.add(cuenta);
+    public void addAccount(BankAccount account) {
+        bankAccounts.add(account);
     }
 }

@@ -1,5 +1,5 @@
 package org.example;
 
-public enum TipoCuenta {
+public enum TypeAccount {
     AHORROS, CORRIENTE;
 }

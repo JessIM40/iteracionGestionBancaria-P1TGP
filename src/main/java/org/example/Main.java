@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         // Crear instacia del banco
-        Banco banco = new Banco();
+        Bank bank = new Bank();
 
         // Recoger datos de consola
         Scanner consoleInput = new Scanner(System.in);
@@ -22,26 +22,25 @@ public class Main {
             System.out.println("6 - Salir");
             System.out.println("Opcion: ");
 
-            int opcion = consoleInput.nextInt();
+            int option = consoleInput.nextInt();
             consoleInput.nextLine();
 
 
-            switch (opcion) {
+            switch (option) {
                 case 1: {
                     // Registrar cliente
                     System.out.println("\n** Registrar Cliente **");
                     System.out.println("Ingrese su nombre: ");
-                    // trim() para eliminar espacios adicionales
-                    String nombre = consoleInput.nextLine().trim();
+                    String firstName = consoleInput.nextLine().trim(); // trim() para eliminar espacios adicionales
                     System.out.println("Ingrese su apellido: ");
-                    String apellido = consoleInput.nextLine().trim();
+                    String lastName = consoleInput.nextLine().trim();
                     System.out.println("Ingrese su DNI: ");
                     String dni = consoleInput.nextLine().trim();
                     System.out.println("Ingrese su email: ");
                     String email = consoleInput.nextLine().trim();
 
                     try {
-                        banco.registrarCliente(nombre, apellido, dni, email);
+                        bank.registerCustomer(firstName, lastName, dni, email);
                         System.out.println("Cliente registrado exitosamente");
                     } catch (IllegalArgumentException e) {
                         System.out.println("Error: " + e.getMessage());
@@ -52,31 +51,31 @@ public class Main {
                     // Abrir cuenta bancaria
                     System.out.println("\n** Abrir Cuenta Bancaria **");
                     System.out.println("Ingrese su DNI: ");
-                    String dniCuenta = consoleInput.nextLine().trim();
+                    String dniAccount = consoleInput.nextLine().trim();
 
-                    if(!banco.clienteRegistrado(dniCuenta)) {
-                        System.out.println("Error: El cliente con DNI " + dniCuenta + " no está registrado");
+                    if(!bank.registeredCustomer(dniAccount)) {
+                        System.out.println("Error: El cliente con DNI " + dniAccount + " no está registrado");
                         break;
                     }
                     // Si dni es valido muestra opciones de cuenta
                     System.out.println("Elija tipo de cuenta:");
                     System.out.println("1 - AHORRO");
                     System.out.println("2 - CORRIENTE");
-                    int tipoCuentaOpcion = consoleInput.nextInt();
+                    int typeAccountOption = consoleInput.nextInt();
                     consoleInput.nextLine().trim();
 
-                    TipoCuenta tipoCuenta = null;
-                    if (tipoCuentaOpcion == 1) {
-                        tipoCuenta = TipoCuenta.AHORROS;
-                    } else if (tipoCuentaOpcion == 2) {
-                        tipoCuenta = TipoCuenta.CORRIENTE;
+                    TypeAccount typeAccount = null;
+                    if (typeAccountOption == 1) {
+                        typeAccount = TypeAccount.AHORROS;
+                    } else if (typeAccountOption == 2) {
+                        typeAccount = TypeAccount.CORRIENTE;
                     } else  {
                         System.out.println("Opción de tipo de cuenta no válida");
                         break;
                     }
 
                     try {
-                        banco.abrirCuenta(dniCuenta, tipoCuenta);
+                        bank.openAccount(dniAccount, typeAccount);
                         System.out.println("Cuenta bancaria abierta exitosamente");
                     } catch (IllegalArgumentException e) {
                         System.out.println("Error: " + e.getMessage());
@@ -87,10 +86,10 @@ public class Main {
                     // Consultar saldo
                     System.out.println("\n** Consultar Saldo **");
                     System.out.println("Ingrese su DNI: ");
-                    String dniSaldo = consoleInput.nextLine().trim();
+                    String dniBalance = consoleInput.nextLine().trim();
 
                     try {
-                        banco.consultarSaldo(dniSaldo);
+                        bank.checkBalance(dniBalance);
                     } catch (IllegalArgumentException e) {
                         System.out.println("Error: " + e.getMessage());
                     }
@@ -99,15 +98,15 @@ public class Main {
                     // Realizar retiro
                     System.out.println("\n** Realizar Retiro **");
                     System.out.println("Ingrese su DNI: ");
-                    String dniRetiro = consoleInput.nextLine().trim();
+                    String dniWithdrawal = consoleInput.nextLine().trim();
                     System.out.println("Ingrese número de cuenta: ");
-                    String numeroCuenta = consoleInput.nextLine().trim();
+                    String numberAccount = consoleInput.nextLine().trim();
                     System.out.println("Ingrese monto a retirar: ");
-                    double montoRetiro = consoleInput.nextDouble();
+                    double withdrawalAmount = consoleInput.nextDouble();
                     consoleInput.nextLine();
 
                     try {
-                        banco.realizarRetiro(dniRetiro, numeroCuenta, montoRetiro);
+                        bank.makeWithdrawal(dniWithdrawal, numberAccount, withdrawalAmount);
                         System.out.println("Retiro realizado exitosamente");
                     } catch (IllegalArgumentException e) {
                         System.out.println("Error: " + e.getMessage());
@@ -118,15 +117,15 @@ public class Main {
                     // Realizar depósito
                     System.out.println("\n** Realizar Depósito **");
                     System.out.println("Ingrese su DNI: ");
-                    String dniDeposito = consoleInput.nextLine().trim();
+                    String dniDeposit = consoleInput.nextLine().trim();
                     System.out.println("Ingrese número de cuenta: ");
-                    String numeroCuentaDeposito = consoleInput.nextLine().trim();
+                    String numberAccountDeposit = consoleInput.nextLine().trim();
                     System.out.println("Ingrese monto a depositar: ");
-                    double montoDeposito = consoleInput.nextDouble();
+                    double depositAmount = consoleInput.nextDouble();
                     consoleInput.nextLine();
 
                     try {
-                        banco.realizarDeposito(dniDeposito, numeroCuentaDeposito, montoDeposito);
+                        bank.makeDeposit(dniDeposit, numberAccountDeposit, depositAmount);
                         System.out.println("Deposito realizado exitosamente");
                     } catch (IllegalArgumentException e) {
                         System.out.println("Error: " + e.getMessage());
