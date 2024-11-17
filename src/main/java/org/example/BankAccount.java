@@ -25,6 +25,7 @@ public class BankAccount {
         return typeAccount;
     }
 
+    // Metodo deposito
     public void deposit(Double amount) {
         if (amount <= 0) {
             throw new IllegalArgumentException("El monto a depositar debe ser mayor a 0");
@@ -32,6 +33,7 @@ public class BankAccount {
         balance += amount;
     }
 
+    // Metodo retiro
     public void withdraw(Double amount) {
         if (amount <= 0) {
             throw new IllegalArgumentException("El monto a retirar debe ser mayor a 0");

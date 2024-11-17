@@ -7,6 +7,10 @@ public class Bank {
     private Map<String, Customer> customers;
     private Map<String, BankAccount> accounts;
 
+    // Contadores
+    private int savinggsAccountCounter = 0;
+    private int checkingAccountCounter = 0;
+
     // Constructor Banco
     public Bank() {
         this.customers = new HashMap<>();
@@ -23,6 +27,11 @@ public class Bank {
         customers.put(dni, customer);
     }
 
+    // Verifica si usuario esta registrado
+    public boolean registeredCustomer(String dni) {
+        return customers.containsKey(dni);
+    }
+
     // Abrir cuenta bancaria
     public void openAccount(String dni, TypeAccount typeAccount) {
         Customer customer = customers.get(dni);
@@ -30,19 +39,26 @@ public class Bank {
             throw new IllegalArgumentException("No está registrado");
         }
 
-        String accountNumber = generateAccountNumber();
+        // Numero de cuenta segun tipo de cuenta
+        String accountNumber = generateAccountNumber(typeAccount);
         BankAccount account = new BankAccount(accountNumber, typeAccount);
         customer.addAccount(account);
         accounts.put(accountNumber, account);
     }
 
-    public boolean registeredCustomer(String dni) {
-        return customers.containsKey(dni);
-    }
-
     // Generar numero de cuenta unico
-    private String generateAccountNumber() {
-        return "CUENTA-" + (accounts.size() + 1);
+    private String generateAccountNumber(TypeAccount typeAccount) {
+        String accountNumber;
+        if (typeAccount == TypeAccount.AHORROS) {
+            savinggsAccountCounter++;
+            accountNumber = "AH-" + String.format("%06d", savinggsAccountCounter);
+        } else if (typeAccount == TypeAccount.CORRIENTE) {
+            checkingAccountCounter++;
+            accountNumber = "CC-" + String.format("%06d", checkingAccountCounter);
+        } else {
+            throw new IllegalArgumentException("Tipo de cuenta no valido");
+        }
+        return accountNumber;
     }
 
     // Consultar saldo
