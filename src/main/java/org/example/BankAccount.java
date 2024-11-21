@@ -7,6 +7,12 @@ public class BankAccount {
 
     // Constructor Cuenta Bancaria
     public BankAccount(String accountNumber, TypeAccount typeAccount) {
+        if (accountNumber == null || accountNumber.isBlank()) {
+            throw new IllegalArgumentException("El número de cuenta no puede ser nulo o vació");
+        }
+        if (typeAccount == null) {
+            throw new IllegalArgumentException("El tipo de cuenta no puede ser nulo");
+        }
         this.accountNumber = accountNumber;
         this.balance = 0.0;
         this.typeAccount = typeAccount;
@@ -25,7 +31,7 @@ public class BankAccount {
         return typeAccount;
     }
 
-    // Metodo deposito
+    // Metodo para realizar un deposito
     public void deposit(Double amount) {
         if (amount <= 0) {
             throw new IllegalArgumentException("El monto a depositar debe ser mayor a 0");
@@ -33,9 +39,9 @@ public class BankAccount {
         balance += amount;
     }
 
-    // Metodo retiro
+    // Metodo para realizar un retiro
     public void withdraw(Double amount) {
-        if (amount <= 0) {
+        if (amount == null || amount <= 0) {
             throw new IllegalArgumentException("El monto a retirar debe ser mayor a 0");
         }
 

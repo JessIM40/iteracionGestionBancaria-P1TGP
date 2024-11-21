@@ -17,12 +17,10 @@ public class Customer {
         if (isNullOrEmpty(firstName) || isNullOrEmpty(lastName) || isNullOrEmpty(dni) || isNullOrEmpty(email)) {
             throw new IllegalArgumentException("Todos los campos son obligatorios");
         }
-
         // Valida formato DNI
-        if (!isalidDNI(dni)) {
+        if (!isValidDNI(dni)) {
             throw new IllegalArgumentException("DNI debe contener exactamente 8 digitos numéricos");
         }
-
         // Valida el formato del email
         if (!isValidEmail(email)) {
             throw new IllegalArgumentException("Email no válido");
@@ -41,7 +39,7 @@ public class Customer {
     }
 
     // Metodo para validar formato DNI
-    private boolean isalidDNI(String dni) {
+    private boolean isValidDNI(String dni) {
         String dniRegex = "^[0-9]{8}$";
         return Pattern.matches(dniRegex, dni.trim());
     }

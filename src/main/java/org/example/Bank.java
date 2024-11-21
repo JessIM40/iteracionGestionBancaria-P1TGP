@@ -58,6 +58,9 @@ public class Bank {
         } else {
             throw new IllegalArgumentException("Tipo de cuenta no valido");
         }
+        if (accounts.containsKey((accountNumber))) {
+            throw new IllegalArgumentException("Error al generar un numero de cuenta unico");
+        }
         return accountNumber;
     }
 
